@@ -1,0 +1,5 @@
+hello sample text
+
+admin:
+username = agriIotAdmin123
+password = agriAdmin@456

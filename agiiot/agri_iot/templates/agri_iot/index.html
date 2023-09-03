@@ -1,0 +1,258 @@
+{% extends 'agri_iot/layout.html' %} {% block title %}AgriIoT | Home{% endblock %}
+<div>{% block content %} {% load static %}</div>
+
+<div class="">
+
+
+  <div class="grid grid-cols-6 gap-2">
+    <div class="border h-screen">
+      <ul>
+        <a href="/agromore/dashboard">
+          <li class="py-2 px-4 text-gray-500 hover:text-gray-700 hover:font-bold border-b shadow-lg">
+            <i class="fa-solid fa-gauge  mx-2"></i>DASHBOARD</li>
+        </a>
+
+        <a href="/agromore/analytics">
+          <li class="py-2 px-4 text-gray-500 hover:text-gray-700 hover:font-bold border-b shadow-lg">
+            <i class="fa-solid fa-chart-line mx-2"></i>Analytics</li>
+        </a>
+
+        <a href="/agromore/datalog">
+          <li class="py-2 px-4 text-gray-500 hover:text-gray-700 hover:font-bold border-b shadow-lg">
+            <i class="fa-solid fa-table-list mx-2"></i>Datalog</li>
+        </a>
+
+        <a href="/agromore/api_key">
+          <li class="py-2 px-4 text-gray-500 hover:text-gray-700 hover:font-bold border-b shadow-lg">
+            <i class="fa-solid fa-key mx-2"></i>Access Tokens</li>
+        </a>
+
+        <a href="/agromore/documantation">
+          <li class="py-2 px-4 text-gray-500 hover:text-gray-700 hover:font-bold border-b shadow-lg">
+            <i class="fa-solid fa-book mx-2"></i>Documentation</li>
+        </a>
+
+        <a href="/agromore/account">
+          <li class="py-2 px-4 text-gray-500 hover:text-gray-700 hover:font-bold border-b shadow-lg">
+            <i class="fa-solid fa-user mx-2"></i>Account</li>
+        </a>
+
+        <a href="{% url 'user_logout' %}" >
+          <li class="py-2 px-4 text-gray-500 hover:text-gray-700 hover:font-bold border-b shadow-lg mt-80">
+            <i class="fa-solid fa-arrow-right-from-bracket mx-2"></i>Logout</li>
+        </a>
+
+
+      </ul>
+    </div>
+    <div class="border col-span-5 mx-2">
+      <h2 class="text-2xl text-center uppercase font-bold m-4 text-gray-600">{{ content.title }}</h2>
+
+      <!-- analytics -->
+      {% if content.title == "analytics" %}
+      <h2 class="text-2xl text-center uppercase font-bold m-4">{{ content.title }}</h2>
+      <div id="chart_div" style="width: 80%; height: 400px;" class="mx-20"></div>
+
+      <!-- datalog -->
+      {% elif content.title == "datalog" %}
+        <h2 class="text-2xl text-center uppercase font-bold m-4">{{ content.title }} link analytics</h2>
+        <div class="mx-10">
+          <table border="1">
+            <thead>
+                <tr>
+                    <!-- <th>User</th> -->
+                    <th class="text-base text-center px-2">Date Stamp</th>
+                    <th class="text-base text-center px-2">Time Stamp</th>
+                    <th class="text-base text-center px-2">Nitrogen</th>
+                    <th class="text-base text-center px-2">Phosphorus</th>
+                    <th class="text-base text-center px-2">Potassium</th>
+                    <th class="text-base text-center px-2">Humidity</th>
+                    <th class="text-base text-center px-2">Temperature</th>
+                    <th class="text-base text-center px-2">Soil Moisture</th>
+                    <th class="text-base text-center px-2">pH</th>
+                    <th class="text-base text-center px-2">State</th>
+                    <th class="text-base text-center px-2">Rainfall</th>
+                    <th class="text-base text-center px-2">Season</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in content.data %}
+                <tr>
+                    <!-- <td>{{ data.user }}</td> -->
+                    <td class="text-center">{{ data.dateStamp }}</td>
+                    <td class="text-center">{{ data.timeStamp }}</td>
+                    <td class="text-center">{{ data.nitrogen }}</td>
+                    <td class="text-center">{{ data.phosphorus }}</td>
+                    <td class="text-center">{{ data.potassium }}</td>
+                    <td class="text-center">{{ data.humidity }}</td>
+                    <td class="text-center">{{ data.temperature }}</td>
+                    <td class="text-center">{{ data.soil_moisture }}</td>
+                    <td class="text-center">{{ data.ph }}</td>
+                    <td class="text-center">{{ data.state }}</td>
+                    <td class="text-center">{{ data.rainfall }}</td>
+                    <td class="text-center">{{ data.season }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+
+
+      <!-- api_key -->
+      {% elif content.title == "Access Tokens" %}
+      <div class="mx-10 my-6">
+        <!-- <p class="text-xl text-gray-700 font-bold mb-10">Access Tokens</p> -->
+        <p class="my-6 font-bold text-gray-700">User Access Tokens</p>
+
+        <p class="text-gray-600 my-6">Access tokens programmatically authenticate your identity to the Hugging Face Hub, allowing applications to perform specific actions specified by the scope of permissions (read, write, or admin) granted. Visit the documentation to discover how to use them.
+        </p>
+
+        <div class="mockup-code w-4/6">
+          <pre data-prefix="$"><code>Access Tokens</code></pre> 
+          <pre data-prefix=">" class="text-success"><code>User : {{ user.username }}</code></pre>
+          <pre data-prefix=">" class="text-warning"><code>ApiKey : {{ content.apiKey }}</code></pre> 
+        </div>
+
+      </div>
+
+
+      <!-- documantation -->
+      {% elif content.title == "documantation" %}
+      <h2 class="text-2xl text-center uppercase font-bold m-4">{{ content.title }} link analytics</h2>
+
+      <!-- account -->
+      {% elif content.title == "account" %}
+      <h2 class="text-2xl text-center uppercase font-bold m-4">{{ content.title }}</h2>
+      <h2 class="text-2xl text-center uppercase font-bold m-4">{{ content.data.userApiKey }}</h2>
+      <div class="mx-10">
+          <p class="my-4 text-xl text-gray-500">
+            Name : {{ content.data.user }}</p>
+        
+          <p class="my-4 text-xl text-gray-500">
+            Phone Number : {{ content.data.phoneNum }}</p>
+
+          <p class="my-4 text-xl text-gray-500">
+            Plan : {{ content.data.userPlan }}</p>
+
+          <p class="my-4 text-xl text-gray-500">
+            Plan Start Date : {{ content.data.userPlanStartDate }}</p>
+
+          <p class="my-4 text-xl text-gray-500">
+            Daily Limit Server Requests : {{ content.data.userDailyLimitServerRequests }}</p>
+
+          <p class="my-4 text-xl text-gray-500">
+            Daily Limit Chat Requests : {{ content.data.userDailyLimitChatRequests }}</p>
+
+          <p class="my-4 text-xl text-gray-500">
+            Daily Limit data record Requests : {{ content.data.userDailyLimitRecRequests }}</p>
+      </div>
+
+
+      <!-- dashboard -->
+      {% else %}
+      <div class="grid grid-cols-4 gap-2 mx-10">
+        <div class="border shadow rounded p-10 text-xl ">
+          <div class="flex justify-center">
+            <img class="rounded-full border border-2 border-[#166534] w-20 h-20"
+              src="{{ content.recommendedCrop.CropImgUrl }}"
+              alt="crop image">
+          </div>
+          <div class="text-center uppercase my-4 text-gray-500">Recommended Crop <br><b>{{ content.recommendedCrop.RecommendedCrop }}</b></div>
+        </div>
+
+        <div class="col-span-3">
+
+          <div class="grid grid-rows-3 grid-flow-col gap-2">
+            {% for labeldata in content.data %}
+            <div class="p-4 border shadow rounded">
+              <p class="text-gray-500">
+                {% if labeldata.0 == "Temperature" %}
+                  <div class="flex">
+                    <p class="px-2 text-xl text-gray-500">{{ labeldata.0 }}  (°C)</p>
+                    <i class="fa-solid fa-temperature-low"></i>
+                  </div>
+                {% elif labeldata.0 == "Humidity" %}
+                  <div class="flex">
+                    <p class="px-2 text-xl text-gray-500">{{ labeldata.0 }}  (%)</p>
+                    <i class="fa-solid fa-droplet"></i>
+                  </div>
+                {% elif labeldata.0 == "Soil Moisture" %}
+                  <div class="flex">
+                    <p class="px-2 text-xl text-gray-500">{{ labeldata.0 }}  (%)</p>
+                    <i class="fa-solid fa-water"></i>
+                  </div>
+                {% elif labeldata.0 == "Rainfall" %}
+                  <div class="flex">
+                    <p class="px-2 text-xl text-gray-500">{{ labeldata.0 }}  (mm)</p>
+                    <i class="fa-solid fa-cloud-showers-water"></i>
+                  </div>
+                {% elif labeldata.0 == "State" %}
+                  <div class="flex">
+                    <p class="px-2 text-xl text-gray-500">{{ labeldata.0 }}</p>
+                    <i class="fa-solid fa-mountain-sun"></i>
+                  </div>
+                {% elif labeldata.0 == "Season" %}
+                  <div class="flex">
+                    <p class="px-2 text-xl text-gray-500">{{ labeldata.0 }}</p>
+                    <i class="fa-solid fa-cloud-sun"></i>
+                  </div>
+                {% else %}
+                    {{ labeldata.0 }}
+                {% endif %}
+
+              </p>
+              <span class="text-2xl font-bold text-gray-500">{{ labeldata.1 }}</span>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <!-- end -->
+
+      {% endif %}
+
+
+    </div>
+  </div>
+
+
+</div>
+
+{% block js %}
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      // analytics
+      function drawChart() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Data');
+          data.addColumn('number', 'Value');
+          
+
+          var raw_data = {{ content.display_data|safe }};
+
+          for (var i = 0; i < raw_data.length; i++) {
+              data.addRow([raw_data[i][0], raw_data[i][1]]);
+          }
+
+          var options = {
+              title: 'Line Chart Example',
+              curveType: 'function',
+              legend: { position: 'bottom' }
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+          chart.draw(data, options);
+      }
+    </script>
+{% endblock %}
+
+
+{% endblock %}

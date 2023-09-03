@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Login</title>
+    {% load static %}
+    <link
+      href="{% static 'agri_iot\CSS\customstyles.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- <link href="https://cdn.jsdelivr.net/npm/daisyui@3.1.7/dist/full.css" rel="stylesheet" type="text/css" /> -->
+
+    <script
+      type="text/javascript"
+      src="{% static '\agri_iot\jsscript\tailwindcss.js' %}"
+    ></script>
+  </head>
+  <body >
+    <div>
+      <h2 class="text-2xl text-center uppercase font-bold m-4">
+        AgroMore
+      </h2>
+      <div class="justify-center h-36">
+        <div class="content-center mx-auto bg-[#ecfccb] px-8 py-6 rounded-lg shadow-2xl w-3/12 my-12">
+          <h2 class="text-center text-2xl font-bold mb-6">User Login</h2>
+          <h4 class="text-base mb-6">Account Type: Free</h4>
+
+          {% if messages %}
+          <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          <form method="post">
+            {% csrf_token %}
+
+            <div class="mb-4">
+              <label
+                class="block text-gray-700 text-sm font-bold mb-2"
+                for="username"
+                >Username</label
+              >
+              <input
+                class="border-b-4 border-indigo-500 rounded-md py-2 px-4 w-full"
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter your username"
+                required
+              />
+            </div>
+            <!-- <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="email"
+                >Email</label
+              >
+              <input
+                class="border border-gray-300 rounded-md py-2 px-4 w-full"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div> -->
+            <div class="mb-6">
+              <label
+                class="block text-gray-700 text-sm font-bold mb-2"
+                for="password"
+                >Password</label
+              >
+              <input
+                class="border-b-4 border-indigo-500 rounded-md py-2 px-4 w-full"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+            <div class="flex justify-evenly">
+              <button
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold text-center rounded-full focus:outline-none w-full p-2"
+                type="submit"
+              >
+                <input type="submit" value="Login" />
+              </button>
+            </div>
+            <a href="/register/free/">
+              <div
+                class="text-black font-bold hover:text-blue-500 py-2 text-center underline my-2 border rounded-full"
+              >
+                Sign Up
+              </div>
+            </a>
+            <a href="/">
+                <div
+                  class="text-black font-bold hover:text-blue-500 py-2 text-center underline my-2"
+                >
+                  Back
+                </div>
+              </a>
+          </form>
+        </div>
+      </div>
+
+      <!-- page end -->
+    </div>
+  </body>
+</html>

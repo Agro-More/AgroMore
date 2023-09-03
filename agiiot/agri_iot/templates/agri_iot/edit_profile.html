@@ -1,0 +1,17 @@
+{% extends 'agri_iot/layout.html' %} {% block title %}AgriIoT | Recommendation Form{% endblock %}
+<div>{% block content %} {% load static %}</div>
+
+<div class="">
+
+
+    <h1>Submit Your Data</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+
+
+</div>
+
+{% endblock %}

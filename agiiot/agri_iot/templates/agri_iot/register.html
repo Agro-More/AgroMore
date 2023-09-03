@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registeration</title>
+    {% load static %}
+    <link
+      href="{% static 'agri_iot\CSS\customstyles.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    
+    <script
+      type="text/javascript"
+      src="{% static '\agri_iot\jsscript\tailwindcss.js' %}"
+    ></script>
+    <title>User Registration</title>
+</head>
+<body>
+    <h2 class="text-2xl text-center uppercase font-bold m-4 mt-10">AgroMore</h2>
+
+    <div class="grid grid-cols-4 gap-4">
+        <div></div>
+        <div class="col-span-2 border border-2 border-gray-400 shadow-lg mt-10 rounded px-20 py-10 m-20">
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <h2 class="text-xl text-black text-center mb-6">User Registration</h2>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label
+                      class="block text-gray-700 text-sm font-bold mb-2"
+                      for="username"
+                      >Username</label
+                    >
+                    <input
+                      class="border-b-2 border border-indigo-500 rounded-md py-2 px-4 w-full shadow-lg"
+                      type="text"
+                      id="username"
+                      name="username"
+                      placeholder="enter your username"
+                      required
+                    />
+                </div>
+
+                <div class="mb-4">
+                    <label
+                      class="block text-gray-700 text-sm font-bold mb-2"
+                      for="phone"
+                      >Phone Number</label
+                    >
+                    <input
+                      class="border-b-2 border border-indigo-500 rounded-md py-2 px-4 w-full shadow-lg"
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="enter your phone no."
+                      required
+                    />
+                </div>
+
+                <div class="mb-4">
+                    <label
+                      class="block text-gray-700 text-sm font-bold mb-2"
+                      for="password"
+                      >Password</label
+                    >
+                    <input
+                      class="border-b-2 border border-indigo-500 rounded-md py-2 px-4 w-full shadow-lg"
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="enter your password"
+                      required
+                    />
+                </div>
+
+                <div class="mb-4">
+                    <label
+                      class="block text-gray-700 text-sm font-bold mb-2"
+                      for="confirm_password"
+                      >Confirm Password</label
+                    >
+                    <input
+                      class="border-b-2 border border-indigo-500 rounded-md py-2 px-4 w-full shadow-lg"
+                      type="password"
+                      id="confirm_password"
+                      name="confirm_password"
+                      placeholder="enter your password again"
+                      required
+                    />
+                </div>
+
+                <!-- <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required><br> -->
+
+                <!-- <label for="phone">Phone Number:</label> -->
+                <!-- <input type="tel" id="phone" name="phone" required><br>         -->
+
+                <!-- <label for="password">Password:</label> -->
+                <!-- <input type="password" id="password" name="password" required><br> -->
+
+                <!-- <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required><br> -->
+
+                <input type="submit" value="Register" class="border border-gray-300 rounded p-4 shadow-lg font-bold hover:text-blue-700">
+                <a href="{% url 'user_login' %}" class="mx-6 p-4 hover:underline font-bold hover:text-blue-700">Login</a>
+                <a href="/" class="mx-6 p-4 hover:underline font-bold hover:text-blue-700">back</a>
+            </form>
+        </div>
+        <div></div>
+
+
+    </div>
+
+</body>
+</html>

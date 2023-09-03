@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  {% load static %}
+  <link href="{% static 'agri_iot\CSS\customstyles.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static 'agri_iot\CSS\daisyui.css' %}" rel="stylesheet" type="text/css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" type="text/css" />
+  
+  <!-- <link href="{% static 'agri_iot\CSS\all.min.css' %}" rel="stylesheet" type="text/css" /> -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/daisyui@3.1.7/dist/full.css" rel="stylesheet" type="text/css" /> -->
+
+  <script type="text/javascript" src="{% static '\agri_iot\jsscript\tailwindcss.js' %}"></script>
+  <script type="text/javascript" src="{% static '\agri_iot\jsscript\script.js' %}"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <style>
+    /* Define the custom style */
+      {% block css %} {% endblock %}
+  </style>
+
+  <title>{% block title %}{% endblock %}</title>
+
+</head>
+
+<body class="bg-white">
+  <nav>
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+
+      <a href="/" class="flex items-center">
+        <img src="{% static 'agri_iot\fields.png' %}"
+          class="h-12 w-12 rounded-full border border-green-600 border-2 mr-2" alt="AgriIoT Logo" />
+        <span class="ml-3 font-bold font-mono text-4xl text-green-700">AgroMore</span>
+      </a>
+
+      <button type="button"
+        class="inline-flex items-center p-2 ml-3 text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 hover:bg-gray-800 focus:ring-gray-800"
+        onclick="toggleMenu()">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" id="menuBtn" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+            clip-rule="evenodd"></path>
+        </svg>
+        <svg class="w-6 h-6 hidden" id="closeBtn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path fill="#6563ff"
+            d="m13.414 12 3.293-3.293a1 1 0 0 0-1.414-1.414L12 10.586 8.707 7.293a1 1 0 0 0-1.414 1.414L10.586 12l-3.293 3.293a1 1 0 0 0 1.414 1.414L12 13.414l3.293 3.293a1 1 0 0 0 1.414-1.414Z">
+          </path>
+          <path fill="#b2b1ff"
+            d="M19.07 4.93A10 10 0 1 0 4.93 19.07 10 10 0 1 0 19.07 4.93Zm-2.363 10.363a1 1 0 1 1-1.414 1.414L12 13.414l-3.293 3.293a1 1 0 0 1-1.414-1.414L10.586 12 7.293 8.707a1 1 0 0 1 1.414-1.414L12 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414L13.414 12Z">
+          </path>
+        </svg>
+      </button>
+
+
+
+      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+        <ul
+          class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 gap-6 font-mono text-xl text-gray-600">
+          <li>
+            {% if user.is_authenticated %}
+              <p class="navBar_text font-bold text-gray-600 uppercase hover:text-green-500"><i class="fa-regular fa-circle-user mx-2"></i>{{ user.username }}</p>
+            {% else %}
+              <p class="navBar_text font-bold text-gray-600"><a href="{% url 'user_login' %}"
+                class="text-gray-600 hover:underline ">Login</a></p>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- main content -->
+  {% block content %}{% endblock %}
+
+  <!-- footer -->
+  <footer class="hidden bg-orange-200 mt-20">
+    <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+      <div class="md:flex md:justify-between">
+        <div class="mb-6 md:mb-0">
+          <a href="/" class="flex items-center">
+            <img src="{% static 'agri_iot\fields.png' %}" class="h-8 mr-3 bg-white rounded-lg" alt="agri_iot Logo" />
+            <span class="self-center text-2xl font-semibold whitespace-nowrap text-green-900">AgroMore</span>
+          </a>
+        </div>
+        <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+          <div>
+            <h2 class="mb-6 text-sm font-semibold text-black uppercase">Resources</h2>
+            <ul class="text-gray-500 font-medium">
+              <li class="mb-4">
+                <a href="https://facebook.com/" class="hover:underline">Crop Recommend Trial</a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/channel/UCV60Pae-UOSmQ9un8gUh6Ag" class="hover:underline">Youtube
+                  Channel</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h2 class="mb-6 text-sm font-semibold text-black uppercase ">Follow us</h2>
+            <ul class="text-gray-500 font-medium">
+              <li class="mb-4">
+                <a href="https://facebook.com" class="hover:underline ">Facebook Page</a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/" class="hover:underline">Instagram Page</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <a href="/productpage">
+              <h2 class="mb-6 text-sm font-semibold text-black uppercase ">Services</h2>
+            </a>
+            <ul class="text-gray-500 font-medium">
+              <li class="mb-4">
+                <a href="/teamzeffort/" class="hover:underline">Products</a>
+              </li>
+              <li class="mb-4">
+                <a href="/teamzeffort/business" class="hover:underline">Business</a>
+              </li>
+              <li>
+                <a href="/teamzeffort/contact" class="hover:underline">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
+      <div class="flex sm:items-center sm:justify-between">
+        <span class="text-sm text-gray-400 font-bold sm:text-center"></span>
+        <span class="text-sm text-gray-400 font-bold sm:text-left"></span>
+        <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
+          <a href="#" class="text-gray-500 hover:text-gray-900">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd"
+                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                clip-rule="evenodd" />
+            </svg>
+            <span class="sr-only">Facebook page</span>
+          </a>
+          <a href="#" class="text-gray-500 hover:text-gray-900">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd"
+                d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                clip-rule="evenodd" />
+            </svg>
+            <span class="sr-only">Instagram page</span>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  </div>
+  </main>
+  </div>
+
+
+  {% block js %}{% endblock %}
+
+</body>
+
+</html>

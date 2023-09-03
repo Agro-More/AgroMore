@@ -1,0 +1,54 @@
+{% extends 'agri_iot/layout.html' %} {% block title %}AgriIoT | Recommendation Form{% endblock %}
+<div>{% block content %} {% load static %}</div>
+
+<div class="">
+  <h2 class="text-2xl text-center uppercase font-bold m-4">
+    Welcome to Agriculture IoT Website
+  </h2>
+
+
+    <h1>Recommendation Form</h1>
+    <form id="recommendationForm">
+        <input type="hidden" name="api_key" value="YOUR_API_KEY">
+        <textarea name="data" rows="10" cols="50">
+        [
+          ["Nitrogen (N)", "342"],
+          ["Phosphorus (P)", "50"],
+          ["Potassium (K)", "21"],
+          ["Humidity", "80"],
+          ["Temperature", "34"],
+          ["Soil Moisture", "90"],
+          ["State", "Maharashtra"],
+          ["Rainfall", "1251"],
+          ["Season", "Kharif"]
+        ]
+        </textarea>
+        <br>
+        <button type="button" onclick="submitRecommendation()">Submit</button>
+    </form>
+
+    <div id="response"></div>
+
+    <script>
+        function submitRecommendation() {
+            const formElement = document.getElementById('recommendationForm');
+            const formData = new FormData(formElement);
+            const url = '/recommend-data/';
+
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response data here
+                const responseDiv = document.getElementById('response');
+                responseDiv.innerHTML = JSON.stringify(data, null, 2);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+
+</div>
+
+{% endblock %}

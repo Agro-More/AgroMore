@@ -1,0 +1,92 @@
+/* customstyles.css */
+
+/* styles.css (or any other name you prefer) */
+/* @import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+.custom-link {
+    @apply block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-300 md:p-0 text-white md:dark:text-blue-300;
+  }
+
+.agiiot_text{
+    @apply text-black bg-blue-700
+  }
+
+.nav-text{
+    @apply block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-white hover:bg-gray-700 hover:text-white md:dark:hover:bg-transparent
+  } */
+
+/* styles.css */
+
+/* Custom styles for .custom-style class */
+.custom-style {
+  display: block;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 1rem;
+  color: #ffffff;
+  background-color: #1a202c;
+  border-radius: 0.25rem;
+}
+
+
+
+/* Custom styles for dark mode */
+/* .dark-mode .custom-style {
+    color: #4299e1;
+  } */
+
+/* -------------- */
+
+.navBar_logo {
+  align-self: center;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.navBar_text {
+  display: block;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 1rem;
+  border-radius: 0.25rem;
+  color: #ffffff;
+}
+
+.navBar_text:hover {
+  color: #450a0a;
+}
+
+.navBar_menuBtn{
+  display: inline-flex;
+  padding: 0.5rem;
+  margin-left: 0.75rem;
+  align-items: center;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #9ca3af;
+}
+
+
+/* ======================================= */
+
+ /* Custom styles for medium-sized screens */
+@media (min-width: 768px) {
+    .custom-style {
+      background-color: transparent;
+      color: #4299e1;
+      padding: 0;
+    }
+    .navBar_text{
+      padding: 0; 
+      border-width: 0; 
+    }
+  }
